@@ -3,7 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalDocs.Web", "ExternalDocs.Web\ExternalDocs.Web.csproj", "{37AE9FC3-0FB3-456D-9679-6DF2F74C2307}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalDocs.Web", "ExternalDocs.Web\ExternalDocs.Web.csproj", "{37AE9FC3-0FB3-456D-9679-6DF2F74C2307}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{03675E81-B135-4A27-9F6E-1081EEDE4DE6}"
+	ProjectSection(SolutionItems) = preProject
+		..\common\.editorconfig = ..\common\.editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F49D3368-FF38-4486-91AA-D3AF9D2C4CD0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2DEB093F-CCBB-409B-836C-1079F9B20B6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +27,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{37AE9FC3-0FB3-456D-9679-6DF2F74C2307} = {F49D3368-FF38-4486-91AA-D3AF9D2C4CD0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2AC5ED1A-462E-42D1-908E-FEF7F0C6F172}
