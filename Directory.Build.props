@@ -4,6 +4,7 @@
     <LangVersion>11.0</LangVersion>
     <Nullable>enable</Nullable>
 	<ImplicitUsings>enable</ImplicitUsings>
+    <IsPackable>false</IsPackable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
