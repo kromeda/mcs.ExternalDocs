@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{03675E81-B135-4A27-9F6E-1081EEDE4DE6}"
 	ProjectSection(SolutionItems) = preProject
 		..\common\.editorconfig = ..\common\.editorconfig
+		..\common\Directory.Build.props = ..\common\Directory.Build.props
+		..\common\Directory.Packages.props = ..\common\Directory.Packages.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F49D3368-FF38-4486-91AA-D3AF9D2C4CD0}"
