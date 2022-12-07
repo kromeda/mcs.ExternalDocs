@@ -24,4 +24,17 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();
 
+string[] defaultRoutes = { "/", "/index" };
+
+app.Use(async (context, next) =>
+{
+    if (defaultRoutes.Contains(context.Request.Path.Value))
+    {
+        context.Response.Redirect("https://kuban.tns-e.ru");
+        return;
+    }
+
+    await next();
+});
+
 app.Run();
