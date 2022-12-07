@@ -1,0 +1,22 @@
+﻿@page "/error-development"
+@model ErrorDevelopmentModel
+@{
+}
+
+<h1 class="text-danger">Ошибка</h1>
+<h2 class="text-danger">Возникла ошибка при обработке запроса в окружении разработки</h2>
+
+@if (Model.HasErrorInfo)
+{
+    <p>
+        <strong>Сообщение:</strong> <code>@Model.ErrorMessage</code>
+    </p>
+
+    <p>
+        <strong>Трассировка вызова:</strong> <code>@Model.StackTrace</code>
+    </p>
+}
+else
+{
+    <p><strong>Не удалось получить информацию об ошибке.</strong></p>
+}

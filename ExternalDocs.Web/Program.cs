@@ -1,13 +1,19 @@
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+builder.AddOptions();
+builder.AddSeqLogger();
 
 builder.Services.AddRazorPages();
 builder.Services.AddApplicationInsightsTelemetry();
 
 WebApplication app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/error-development");
+}
+else
+{
+    app.UseExceptionHandler("/error");
     app.UseHsts();
 }
 
