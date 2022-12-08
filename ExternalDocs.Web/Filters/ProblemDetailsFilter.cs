@@ -17,7 +17,7 @@
             }
             catch (ProblemException pe)
             {
-                _logger.LogError(pe, "Ошибка при обратотке запроса. {Title}.", pe.Problem.Title);
+                _logger.LogWarning(pe, "Ошибка при обратотке запроса. Title: {Title}; Detail: {Detail}", pe.Problem.Title, pe.Problem.Detail);
                 return Results.Redirect("/filenotfound");
             }
         }

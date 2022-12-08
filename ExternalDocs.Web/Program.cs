@@ -25,24 +25,31 @@ app.Use(async (context, next) =>
 
 app.MapGet("/{physical:regex([01])}/{token:regex(^[a-zA-Z0-9]{{6,}}$)}",
     async (int physical, string token, CancellationToken ct) =>
-        await FindFile(async communicator => await communicator.GetNotificationFile(physical == 1, token, ct)))
+        await FindFile(async communicator => await communicator.GetNotificationFile(physical == 1, token, ct), token))
     .AddFileFilters();
 
 app.MapGet("/n/{physical:regex([01])}/{token:guid}",
     async (int physical, Guid token, CancellationToken ct) =>
-        await FindFile(async communicator => await communicator.GetNotificationFile(physical == 1, token, ct)))
+        await FindFile(async communicator => await communicator.GetNotificationFile(physical == 1, token, ct), token.ToString()))
     .AddFileFilters();
 
 app.Run();
 
-async Task<IResult> FindFile(Func<IAvaxCommunicator, Task<FileDocumentView>> handler)
+async Task<IResult> FindFile(Func<IAvaxCommunicator, Task<FileDocumentView>> handler, string token)
 {
     IAvaxCommunicator communicator = app.Services.GetRequiredService<IAvaxCommunicator>();
+    ILogger<Program> logger = app.Services.GetRequiredService < ILogger<Program>>();
+
     FileDocumentView doc = await handler.Invoke(communicator);
 
-    IResult result = doc == null
-        ? Results.Redirect("/filenotfound")
-        : Results.File(doc.Data, contentType: "application/pdf");
-
-    return result;
+    if (doc == null)
+    {
+        logger.LogWarning("Файл не найден. Идентификатор: {Token}", token);
+        return Results.Redirect("/filenotfound");
+    }
+    else
+    {
+        logger.LogInformation("Запрошен файл \"{FileName}\" по идентификатору {Token}", doc.Name, token);
+        return Results.File(doc.Data, contentType: "application/pdf");
+    }
 }
