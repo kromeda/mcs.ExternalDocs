@@ -19,6 +19,9 @@ app.Use(async (context, next) =>
     if (context.Response.StatusCode == 404)
     {
         context.Response.Redirect("/pagenotfound");
+        ILogger<Program> logger = app.Services.GetRequiredService<ILogger<Program>>();
+        logger.LogWarning("Страница не найдена.");
+
         return;
     }
 });
@@ -38,7 +41,7 @@ app.Run();
 async Task<IResult> FindFile(Func<IAvaxCommunicator, Task<FileDocumentView>> handler, string token)
 {
     IAvaxCommunicator communicator = app.Services.GetRequiredService<IAvaxCommunicator>();
-    ILogger<Program> logger = app.Services.GetRequiredService < ILogger<Program>>();
+    ILogger<Program> logger = app.Services.GetRequiredService<ILogger<Program>>();
 
     FileDocumentView doc = await handler.Invoke(communicator);
 
