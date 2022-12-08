@@ -5,6 +5,8 @@
         public static void AddOptions(this WebApplicationBuilder builder)
         {
             builder.Services.AddOptions();
+            builder.Services.Configure<DocumentsConfiguration>(
+                builder.Configuration.GetSection(nameof(DocumentsConfiguration)));
             builder.Configuration.AddJsonFile($"appsettings.{Utility.CurrentEnvironment}.json");
         }
 

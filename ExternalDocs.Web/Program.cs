@@ -4,37 +4,45 @@ builder.AddSeqLogger();
 
 builder.Services.AddRazorPages();
 builder.Services.AddApplicationInsightsTelemetry();
+builder.Services.AddHttpClients();
 
 WebApplication app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/error-development");
-}
-else
-{
-    app.UseExceptionHandler("/error");
-    app.UseHsts();
-}
-
-app.UseHttpsRedirection();
+app.AddExceptionPage();
 app.UseStaticFiles();
-
 app.UseRouting();
-app.UseAuthorization();
 app.MapRazorPages();
-
-string[] defaultRoutes = { "/", "/index" };
 
 app.Use(async (context, next) =>
 {
-    if (defaultRoutes.Contains(context.Request.Path.Value))
+    await next(context);
+    if (context.Response.StatusCode == 404)
     {
-        context.Response.Redirect("https://kuban.tns-e.ru");
+        context.Response.Redirect("/pagenotfound");
         return;
     }
-
-    await next();
 });
 
+app.MapGet("/{physical:regex([01])}/{token:regex(^[a-zA-Z0-9]{{6,}}$)}",
+    async (int physical, string token, CancellationToken ct) =>
+        await FindFile(async communicator => await communicator.GetNotificationFile(physical == 1, token, ct)))
+    .AddFileFilters();
+
+app.MapGet("/n/{physical:regex([01])}/{token:guid}",
+    async (int physical, Guid token, CancellationToken ct) =>
+        await FindFile(async communicator => await communicator.GetNotificationFile(physical == 1, token, ct)))
+    .AddFileFilters();
+
 app.Run();
+
+async Task<IResult> FindFile(Func<IAvaxCommunicator, Task<FileDocumentView>> handler)
+{
+    IAvaxCommunicator communicator = app.Services.GetRequiredService<IAvaxCommunicator>();
+    FileDocumentView doc = await handler.Invoke(communicator);
+
+    IResult result = doc == null
+        ? Results.Redirect("/filenotfound")
+        : Results.File(doc.Data, contentType: "application/pdf");
+
+    return result;
+}
