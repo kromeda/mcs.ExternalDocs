@@ -37,18 +37,18 @@ namespace ExternalDocs.Web.Services
                 TimeSpan.FromSeconds(5)
             });
 
-        public async Task<FileDocumentView> GetNotificationFile(bool physic, Guid token, CancellationToken ct)
+        public async Task<FileDocument> GetNotificationFile(bool physic, Guid token, CancellationToken ct)
         {
             string route = $"api/external/{physic}/{token}";
             HttpResponseMessage response = await RetryPolicy.ExecuteAsync(() => _httpClient.GetAsync(route, ct));
-            return await ReadContent<FileDocumentView>(response, ct);
+            return await ReadContent<FileDocument>(response, ct);
         }
 
-        public async Task<FileDocumentView> GetNotificationFile(bool physic, string token, CancellationToken ct)
+        public async Task<FileDocument> GetNotificationFile(bool physic, string token, CancellationToken ct)
         {
             string route = $"api/external/{physic}/file/{token}";
             HttpResponseMessage response = await RetryPolicy.ExecuteAsync(() => _httpClient.GetAsync(route, ct));
-            return await ReadContent<FileDocumentView>(response, ct);
+            return await ReadContent<FileDocument>(response, ct);
         }
 
         private static async Task<T> ReadContent<T>(HttpResponseMessage response, CancellationToken ct)

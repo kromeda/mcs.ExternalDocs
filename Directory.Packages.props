@@ -1,22 +1,20 @@
 <Project>
   <ItemGroup>
     <PackageVersion Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-
-	  <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-	  <PackageVersion Include="xunit" Version="2.4.2" />
-	  <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5">
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		  <PrivateAssets>all</PrivateAssets>
-	  </PackageVersion>
-	  <PackageVersion Include="coverlet.collector" Version="3.1.2">
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		  <PrivateAssets>all</PrivateAssets>
-	  </PackageVersion>
-
-	  <PackageVersion Include="Serilog.AspNetCore" Version="6.1.0" />
-	  <PackageVersion Include="Serilog.Sinks.Seq" Version="5.2.2" />
-	  <PackageVersion Include="Polly" Version="7.2.3" />
-	  <PackageVersion Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
-	  
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageVersion Include="xunit" Version="2.4.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageVersion>
+    <PackageVersion Include="coverlet.collector" Version="3.1.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageVersion>
+    <PackageVersion Include="Serilog.AspNetCore" Version="6.1.0" />
+    <PackageVersion Include="Serilog.Sinks.Seq" Version="5.2.2" />
+    <PackageVersion Include="Polly" Version="7.2.3" />
+    <PackageVersion Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+    <PackageVersion Include="FastEndpoints" Version="5.5.0" />
   </ItemGroup>
 </Project>

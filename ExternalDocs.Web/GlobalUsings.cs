@@ -1,10 +1,13 @@
-﻿global using ExternalDocs.Web.Extensions;
-global using ExternalDocs.Web.Filters;
+﻿global using ExternalDocs.Web.Endpoints.PostProcessors;
+global using ExternalDocs.Web.Extensions;
+global using ExternalDocs.Web.Middleware;
 global using ExternalDocs.Web.Models;
 global using ExternalDocs.Web.Models.Exceptions;
 global using ExternalDocs.Web.Models.Interfaces;
+global using ExternalDocs.Web.Models.Requests;
 global using ExternalDocs.Web.Services;
 global using ExternalDocs.Web.Utils;
+global using FastEndpoints;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.Extensions.Options;
 global using Serilog;

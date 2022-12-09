@@ -1,6 +1,6 @@
 ﻿namespace ExternalDocs.Web.Models
 {
-    internal class FileDocumentView
+    public class FileDocument
     {
         public string Name { get; set; }
 
