@@ -8,7 +8,7 @@
         {
             Get("/n/{physical:regex([01])}/{token:guid}");
             AllowAnonymous();
-            PostProcessors(new MarkInlineHeader<NotificationRequest<Guid>, FileDocument>());
+            PreProcessors(new MarkInlineHeader<NotificationRequest<Guid>>());
         }
 
         public override async Task HandleAsync(NotificationRequest<Guid> request, CancellationToken ct)

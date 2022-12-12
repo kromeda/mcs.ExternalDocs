@@ -8,7 +8,7 @@
         {
             Get("/{physical:regex([01])}/{token:regex(^[a-zA-Z0-9]{{6,}}$)}");
             AllowAnonymous();
-            PostProcessors(new MarkInlineHeader<NotificationRequest<string>, FileDocument>());
+            PreProcessors(new MarkInlineHeader<NotificationRequest<string>>());
         }
 
         public override async Task HandleAsync(NotificationRequest<string> request, CancellationToken ct)

@@ -3,16 +3,12 @@ using Microsoft.Net.Http.Headers;
 
 namespace ExternalDocs.Web.Endpoints.PostProcessors
 {
-    public class MarkInlineHeader<TRequest, TResponse> : IPostProcessor<TRequest, TResponse>
-        where TResponse : FileDocument
+    public class MarkInlineHeader<TRequest> : IPreProcessor<TRequest>
     {
-        public Task PostProcessAsync(TRequest req, TResponse res, HttpContext ctx, IReadOnlyCollection<ValidationFailure> failures, CancellationToken ct)
+        public Task PreProcessAsync(TRequest req, HttpContext ctx, List<ValidationFailure> failures, CancellationToken ct)
         {
-            if (res != null)
-            {
-                string headerValue = $"inline; filename={res.Name}; filename*=UTF-8''{res.Name}";
-                ctx.Response.Headers.Add(HeaderNames.ContentDisposition, headerValue);
-            }
+            string headerValue = $"inline; filename=restriction.pdf; filename*=UTF-8''restriction.pdf";
+            ctx.Response.Headers.Add(HeaderNames.ContentDisposition, headerValue);
 
             return Task.CompletedTask;
         }
