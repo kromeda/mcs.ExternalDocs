@@ -9,6 +9,8 @@ global using ExternalDocs.Web.Services;
 global using ExternalDocs.Web.Utils;
 global using FastEndpoints;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.RazorPages;
 global using Microsoft.Extensions.Options;
 global using Serilog;
 global using System.Net;
+global using System.Threading.RateLimiting;

@@ -3,18 +3,20 @@ builder.AddOptions();
 builder.AddSeqLogger();
 
 builder.Services.AddFastEndpoints();
+builder.Services.AddFixedWindowRateLimiter(builder);
+
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClients();
 
 WebApplication app = builder.Build();
 
+app.UseRateLimiter();
 app.AddExceptionPage();
 app.UseStaticFiles();
-app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseFastEndpoints();
+app.UseFastEndpoints().UseRateLimiter();
 app.AddLostRedirectPage();
 
 app.Run();

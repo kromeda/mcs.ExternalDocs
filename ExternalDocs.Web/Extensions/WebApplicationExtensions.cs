@@ -23,9 +23,6 @@
                 if (context.Response.StatusCode == 404)
                 {
                     context.Response.Redirect("/pagenotfound");
-                    ILogger<Program> logger = app.Services.GetRequiredService<ILogger<Program>>();
-            
-                    logger.LogWarning("Страница не найдена.");
                 }
             });
         }
