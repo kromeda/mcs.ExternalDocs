@@ -23,7 +23,7 @@
                 if (context.Response.StatusCode == 404)
                 {
                     ILogger<Program> logger = context.RequestServices.GetService<ILogger<Program>>();
-                    logger.LogWarning("Страница не найдена по адресу: {Host}{Path}",
+                    logger.LogWarning("Страница не найдена по адресу {Host}{Path}",
                         context.Request.Host.Value, context.Request.Path.Value);
                     context.Response.Redirect("/pagenotfound");
                 }

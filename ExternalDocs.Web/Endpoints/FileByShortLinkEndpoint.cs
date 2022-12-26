@@ -24,7 +24,7 @@
             {
                 Response = doc;
                 await SendBytesAsync(doc.Data, contentType: "application/pdf", cancellation: ct);
-                Logger.LogInformation("Запрошен файл, название: {FileName}, по идентификатору: {Token}.", doc.Name, request.Token);
+                Logger.LogInformation("Запрошен файл, название: {FileName}, по идентификатору: {Token}", doc.Name, request.Token);
             }
         }
     }
