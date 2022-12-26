@@ -14,3 +14,4 @@ global using Microsoft.Extensions.Options;
 global using Serilog;
 global using System.Net;
 global using System.Threading.RateLimiting;
+global using System.Text;

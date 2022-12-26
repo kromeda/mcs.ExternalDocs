@@ -29,11 +29,14 @@
                         Window = TimeSpan.FromSeconds(configuration.Window)
                     });
                 });
-                o.OnRejected = (ctx, token) =>
+                o.OnRejected = async (ctx, token) =>
                 {
                     ILogger<Program> logger = ctx.HttpContext.Resolve<ILogger<Program>>();
                     logger.LogWarning("Too many requests from client [{Ip}]", ctx.HttpContext.Connection.RemoteIpAddress);
-                    return ValueTask.CompletedTask;
+
+                    StaticResolver resolver = ctx.HttpContext.Resolve<StaticResolver>();
+                    string pageContent = await resolver.GetMarkup("TooManyRequests.html");
+                    await ctx.HttpContext.Response.WriteAsync(pageContent, Encoding.UTF8, token);
                 };
             });
 

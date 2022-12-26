@@ -7,6 +7,7 @@ builder.Services.AddFixedWindowRateLimiter(builder);
 
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClients();
+builder.Services.AddSingleton<StaticResolver>();
 
 WebApplication app = builder.Build();
 
