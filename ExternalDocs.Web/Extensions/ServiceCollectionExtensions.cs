@@ -32,7 +32,7 @@
                 o.OnRejected = async (ctx, token) =>
                 {
                     ILogger<Program> logger = ctx.HttpContext.Resolve<ILogger<Program>>();
-                    logger.LogWarning("Too many requests from client [{Ip}]", ctx.HttpContext.Connection.RemoteIpAddress);
+                    logger.LogWarning("Слишком много запросов от клиента [{Ip}]", ctx.HttpContext.Connection.RemoteIpAddress);
 
                     StaticResolver resolver = ctx.HttpContext.Resolve<StaticResolver>();
                     string pageContent = await resolver.GetMarkup("TooManyRequests.html");
