@@ -1,26 +1,25 @@
-﻿namespace ExternalDocs.Web.Services
+﻿namespace ExternalDocs.Web.Services;
+
+public class StaticResolver
 {
-    public class StaticResolver
+    private readonly IWebHostEnvironment _environment;
+    private readonly IDictionary<string, string> _cachedMarkups;
+
+    public StaticResolver(IWebHostEnvironment environment)
     {
-        private readonly IWebHostEnvironment _environment;
-        private readonly IDictionary<string, string> _cachedMarkups;
+        _environment = environment;
+        _cachedMarkups = new ConcurrentDictionary<string, string>();
+    }
 
-        public StaticResolver(IWebHostEnvironment environment)
+    public async Task<string> GetMarkup(string fileName)
+    {
+        if (!_cachedMarkups.TryGetValue(fileName, out string content))
         {
-            _environment = environment;
-            _cachedMarkups = new Dictionary<string, string>();
+            string markupPath = Path.Combine(_environment.WebRootPath, "markup", fileName);
+            content = await File.ReadAllTextAsync(markupPath, Encoding.UTF8);
+            _cachedMarkups.Add(fileName, content);
         }
 
-        public async Task<string> GetMarkup(string fileName)
-        {
-            if (!_cachedMarkups.TryGetValue(fileName, out string content))
-            {
-                string markupPath = Path.Combine(_environment.WebRootPath, "markup", fileName);
-                content = await File.ReadAllTextAsync(markupPath, Encoding.UTF8);
-                _cachedMarkups.Add(fileName, content);
-            }
-
-            return content;
-        }
+        return content;
     }
 }
